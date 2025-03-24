@@ -9,15 +9,15 @@ with cleaned_data as (
         dma_name as region_name,
         term as search_term,
         score,
-        rank,
-        week as week_date
-        refresh_date as date
+        rank as search_rank,
+        week as week_date,
+        refresh_date
 
     from {{ source('google_trends', 'top_terms') }}
 
     where dma_id is not null 
         and term is not null
-        and refresh_date >= '2023-01-01'
+        and week >= '2023-01-01'
 )
 
 select distinct *

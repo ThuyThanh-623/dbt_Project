@@ -5,13 +5,13 @@ with cleaned_data as (
         region_code as region_code,
         region_name as region_name,
         term as search_term,
-        rank,
+        rank as search_rank,
         score,
         week as week_date,
-        refresh_date as date
+        refresh_date
     from {{ source("google_trends", "international_top_terms") }}
     where
-        refresh_date >= '2023-01-01'
+        week >= '2023-01-01'
         and term is not null
         and country_code is not null
 )

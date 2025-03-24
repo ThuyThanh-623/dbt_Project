@@ -8,18 +8,18 @@ with cleaned_data as (
         dma_id as region_id,
         dma_name as region_name,
         term as search_rising_term,
-        rank,
+        rank as rising_rank,
         score,
         percent_gain as growth_percent,
         week as week_date,
-        refresh_date as date
+        refresh_date
 
     from {{ source('google_trends', 'top_rising_terms') }}
 
     where dma_id is not null 
         and term is not null
         and percent_gain >= 100
-        and refresh_date >= '2023-01-01'
+        and week >= '2023-01-01'
 )
 
 select distinct *
