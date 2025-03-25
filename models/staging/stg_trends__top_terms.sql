@@ -5,13 +5,13 @@
 with cleaned_data as (
     select
 
-        dma_id as region_id,
-        dma_name as region_name,
         term as search_term,
+        rank,
         score,
-        rank as search_rank,
-        week as week_date,
-        refresh_date
+        refresh_date,
+        dma_name,
+        dma_id,
+        week
 
     from {{ source('google_trends', 'top_terms') }}
 
